@@ -1,0 +1,5 @@
+﻿used to define contracts for services that the application logic depends on — but are not part of the domain itself.
+you need to interact with external concerns like:
+
+1-Email services
+2-Notification services
