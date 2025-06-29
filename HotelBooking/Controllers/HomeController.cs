@@ -1,4 +1,4 @@
-using HotelBooking.Models;
+using HotelBooking.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
