@@ -1,1 +1,1 @@
-﻿to implment any Interface at application lay
+﻿to implment any Interface at application layer
