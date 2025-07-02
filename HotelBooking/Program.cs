@@ -1,5 +1,3 @@
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking

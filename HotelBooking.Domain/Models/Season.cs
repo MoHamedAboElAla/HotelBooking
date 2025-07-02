@@ -10,11 +10,13 @@ namespace HotelBooking.Domain.Models
     public class Season
     {
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 100 characters")]
         public string? Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Start date is required")]
         public DateTime StartDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "End date is required")]
         public DateTime EndDate { get; set; }
         [Required, Range(50, 200, ErrorMessage = "Price factor must be between 50 and 200.0.")]
         public decimal PriceFactor { get; set; }
