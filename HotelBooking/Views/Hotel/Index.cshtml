@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Hotel>
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>All Hotels</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Hotel</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Country</th>
+            <th>Stars</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hotel in Model)
+        {
+            <tr>
+                <td>@hotel.Name</td>
+                <td>@hotel.Location</td>
+                <td>@hotel.Country</td>
+                <td>@hotel.Stars</td>
+                <td>
+                    <img src="@Url.Content("~/Uploads/hotels/" + hotel.ImageUrl)"  alt="Hotel Image" style="width: 100px;" />
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@hotel.Id" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Edit" asp-route-id="@hotel.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@hotel.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

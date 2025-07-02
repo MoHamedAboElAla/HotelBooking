@@ -1,0 +1,28 @@
+﻿
+@model HotelViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Hotel Details</h1>
+
+<div class="card p-4 shadow-sm">
+    <div class="d-flex flex-wrap gap-4 align-items-start">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="text-center">
+                <img src="@Model.ImageUrl" alt="Hotel Image" class="rounded shadow-sm" style="max-width: 250px;" />
+            </div>
+        }
+
+        <div style="min-width: 250px;">
+            <h4 class="text-primary">@Model.Name</h4>
+            <p><strong>Location:</strong> @Model.Location</p>
+            <p><strong>Country:</strong> @Model.Country</p>
+            <p><strong>Stars:</strong> @Model.Stars ⭐</p>
+            <p><strong>Description:</strong><br />@Model.Description</p>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-4">Back to List</a>
