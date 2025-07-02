@@ -1,0 +1,39 @@
+﻿@model IEnumerable<HotelBooking.Domain.Models.Season>
+
+@{
+    ViewData["Title"] = "Seasons";
+}
+
+<h2>Seasons</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Season</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Price Factor</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var season in Model)
+        {
+            <tr>
+                <td>@season.Name</td>
+                <td>@season.StartDate.ToShortDateString()</td>
+                <td>@season.EndDate.ToShortDateString()</td>
+                <td>@season.PriceFactor</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@season.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@season.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@season.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
