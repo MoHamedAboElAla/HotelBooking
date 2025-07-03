@@ -110,7 +110,15 @@ namespace HotelBooking.Controllers
                 return View(model);
             var hotel = await _hotelRepo.GetByIdAsync(model.Id);
             if (hotel == null)
+            {
                 return NotFound();
+            }
+
+            hotel.Name = model.Name;
+            hotel.Location = model.Location;
+            hotel.Country = model.Country;
+            hotel.Stars = model.Stars;
+            hotel.Description = model.Description;
 
             if (model.ImageFile != null && model.ImageFile.Length > 0)
             {
