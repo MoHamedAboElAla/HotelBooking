@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Domain.IRepositories;
 using HotelBooking.Domain.Models;
+using HotelBooking.Infrastructure.Repositories;
 using HotelBooking.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,21 +8,22 @@ namespace HotelBooking.Controllers
 {
     public class HotelController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public HotelController(IUnitOfWork unitOfWork)
+
+        private readonly IRepo<Hotel> _repo;
+        public HotelController(IRepo<Hotel> repo)
         {
-            _unitOfWork = unitOfWork;
+            _repo = repo;
         }
         public async Task <IActionResult> Index()
         {
-            var hotels = await _unitOfWork.Hotels.GetAllAsync();
+            var hotels = await _repo.GetAllAsync();
 
             return View(hotels);
         }
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var hotel = await _unitOfWork.Hotels.GetByIdAsync(id);
+            var hotel = await _repo.GetByIdAsync(id);
             if (hotel == null)
                 return NotFound();
             var model = new HotelViewModel
@@ -74,14 +76,15 @@ namespace HotelBooking.Controllers
                 Description = model.Description,
                 ImageUrl = imageName
             };
-            await _unitOfWork.Hotels.AddAsync(hotel);
-            await _unitOfWork.SaveAsync();
+
+            await _repo.AddAsync(hotel);
+            await _repo.SaveAsync();
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var hotel = await _unitOfWork.Hotels.GetByIdAsync(id);
+            var hotel = await _repo.GetByIdAsync(id);
             if (hotel == null)
                 return NotFound();
             var viewModel = new HotelViewModel
@@ -104,7 +107,7 @@ namespace HotelBooking.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            var hotel = await _unitOfWork.Hotels.GetByIdAsync(model.Id);
+            var hotel = await _repo.GetByIdAsync(model.Id);
             if (hotel == null)
                 return NotFound();
 
@@ -127,14 +130,15 @@ namespace HotelBooking.Controllers
                 }
                 hotel.ImageUrl = newImageName;
             }
-            _unitOfWork.Hotels.Update(hotel);
-            await _unitOfWork.SaveAsync();
+
+            _repo.Update(hotel);
+            await _repo.SaveAsync();
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var hotel = await _unitOfWork.Hotels.GetByIdAsync(id);
+            var hotel = await _repo.GetByIdAsync(id);
             if (hotel == null)
                 return NotFound();
 
@@ -145,12 +149,11 @@ namespace HotelBooking.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var hotel = await _unitOfWork.Hotels.GetByIdAsync(id);
-            if (hotel == null)
-                return NotFound();
 
-             _unitOfWork.Hotels.Delete(hotel);
-            await _unitOfWork.SaveAsync();
+            var hotel = await _repo.GetByIdAsync(id);
+            if (hotel == null)
+            _repo.Delete(hotel);
+            await _repo.SaveAsync();
             return RedirectToAction("Index");
         }
     }

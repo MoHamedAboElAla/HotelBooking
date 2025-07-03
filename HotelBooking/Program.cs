@@ -16,7 +16,7 @@ namespace HotelBooking
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
             builder.Services.AddScoped<IHotelRepo, HotelRepo>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

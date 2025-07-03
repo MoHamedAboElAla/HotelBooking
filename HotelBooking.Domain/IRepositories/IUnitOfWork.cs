@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Domain.IRepositories
 {
+    /*
     public interface IUnitOfWork
     {
         IHotelRepo Hotels { get; }
         Task SaveAsync();
     }
+    */
 }
