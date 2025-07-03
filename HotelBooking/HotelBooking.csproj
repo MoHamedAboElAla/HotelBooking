@@ -20,7 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< feature/room-crud
+    <Folder Include="wwwroot\images\" />
+=======
     <Folder Include="wwwroot\Uploads\hotels\" />
+>>>>>>> master
   </ItemGroup>
 
 </Project>

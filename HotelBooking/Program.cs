@@ -14,14 +14,17 @@ namespace HotelBooking
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<HotelBooking.Infrastructure.Data.AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
           
           builder.Services.AddScoped<HotelBooking.Domain.IRepositories.ISeasonRepo, HotelBooking.Infrastructure.Repositories.SeasonRepo>();     
+          builder.Services.AddScoped<IRoomRepo, RoomRepo>();
           builder.Services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
           builder.Services.AddScoped<IHotelRepo, HotelRepo>();
           
           
           
           var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
