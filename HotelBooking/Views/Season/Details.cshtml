@@ -4,25 +4,111 @@
     ViewData["Title"] = "Season Details";
 }
 
-<h2>Season Details</h2>
+<style>
+    :root {
+        --info-gradient: linear-gradient(135deg, #74c0fc 0%, #4dabf7 100%);
+        --gray-gradient: linear-gradient(135deg, #dee2e6 0%, #ced4da 100%);
+        --card-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        --border-radius: 1rem;
+    }
 
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">Name</dt>
-        <dd class="col-sm-10">@Model.Name</dd>
+    .details-section {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+        padding: 2rem;
+        max-width: 700px;
+        margin: 3rem auto;
+    }
 
-        <dt class="col-sm-2">Start Date</dt>
-        <dd class="col-sm-10">@Model.StartDate.ToShortDateString()</dd>
+    .details-title {
+        background: var(--info-gradient);
+        color: white;
+        padding: 1.5rem;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        font-size: 1.75rem;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: inset 0 -3px 6px rgba(0,0,0,0.1);
+    }
 
-        <dt class="col-sm-2">End Date</dt>
-        <dd class="col-sm-10">@Model.EndDate.ToShortDateString()</dd>
+    .table-details {
+        width: 100%;
+        margin-top: 2rem;
+        border-collapse: collapse;
+    }
 
-        <dt class="col-sm-2">Price Factor</dt>
-        <dd class="col-sm-10">@Model.PriceFactor</dd>
-    </dl>
-</div>
+        .table-details th,
+        .table-details td {
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    .details-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .btn-edit {
+        background: var(--info-gradient);
+        color: white;
+        font-weight: bold;
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-edit:hover {
+            box-shadow: 0 4px 15px rgba(116, 192, 252, 0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    .btn-back {
+        background: var(--gray-gradient);
+        color: #495057;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: #ced4da;
+            transform: translateY(-2px);
+            color: #212529;
+        }
+</style>
+
+<div class="details-section">
+    <div class="details-title">Season Details</div>
+
+    <table class="table-details">
+        <tr>
+            <th>Name</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Start Date</th>
+            <td>@Model.StartDate.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <th>End Date</th>
+            <td>@Model.EndDate.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <th>Price Factor</th>
+            <td>@Model.PriceFactor</td>
+        </tr>
+    </table>
+
+    <div class="details-actions">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-edit">Edit</a>
+        <a asp-action="Index" class="btn-back">Back to List</a>
+    </div>
 </div>
