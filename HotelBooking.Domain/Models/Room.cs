@@ -27,7 +27,7 @@ namespace HotelBooking.Domain.Models
         [Required, StringLength(700, MinimumLength = 20, ErrorMessage = "Description must be between 20 and 700 characters.")]
         public string? Description { get; set; }
 
-        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
+        //[AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
         public string? ImageUrl { get; set; }
 
         [ForeignKey("Hotel")]

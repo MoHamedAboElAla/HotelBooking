@@ -1,3 +1,5 @@
+using HotelBooking.Domain.IRepositories;
+using HotelBooking.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking
@@ -13,6 +15,7 @@ namespace HotelBooking
             builder.Services.AddDbContext<HotelBooking.Infrastructure.Data.AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddScoped<HotelBooking.Domain.IRepositories.ISeasonRepo, HotelBooking.Infrastructure.Repositories.SeasonRepo>();
+            builder.Services.AddScoped<IRoomRepo, RoomRepo>();
             //builder.Services.AddScoped<ISeasonService, SeasonService>();
             var app = builder.Build();
 
