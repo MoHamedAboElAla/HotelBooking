@@ -1,6 +1,7 @@
 using HotelBooking.Domain.IRepositories;
 using HotelBooking.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelBooking
 {
@@ -16,8 +17,8 @@ namespace HotelBooking
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
           
           builder.Services.AddScoped<HotelBooking.Domain.IRepositories.ISeasonRepo, HotelBooking.Infrastructure.Repositories.SeasonRepo>();     
-          builder.Services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
-          builder.Services.AddScoped<IHotelRepo, HotelRepo>();
+         // builder.Services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
+          builder.Services.AddScoped<HotelBooking.Domain.IRepositories.IHotelRepo, HotelRepo>();
           
           
           

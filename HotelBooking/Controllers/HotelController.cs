@@ -9,21 +9,22 @@ namespace HotelBooking.Controllers
     public class HotelController : Controller
     {
 
-        private readonly IRepo<Hotel> _repo;
-        public HotelController(IRepo<Hotel> repo)
+        private readonly IHotelRepo _hotelRepo;
+        public HotelController(IHotelRepo hotelRepo)
         {
-            _repo = repo;
+
+            _hotelRepo = hotelRepo;
         }
         public async Task <IActionResult> Index()
         {
-            var hotels = await _repo.GetAllAsync();
+            var hotels = await _hotelRepo.GetAllAsync();
 
             return View(hotels);
         }
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var hotel = await _repo.GetByIdAsync(id);
+            var hotel = await _hotelRepo.GetByIdAsync(id);
             if (hotel == null)
                 return NotFound();
             var model = new HotelViewModel
@@ -77,14 +78,14 @@ namespace HotelBooking.Controllers
                 ImageUrl = imageName
             };
 
-            await _repo.AddAsync(hotel);
-            await _repo.SaveAsync();
+            await _hotelRepo.AddAsync(hotel);
+            await _hotelRepo.SaveAsync();
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var hotel = await _repo.GetByIdAsync(id);
+            var hotel = await _hotelRepo.GetByIdAsync(id);
             if (hotel == null)
                 return NotFound();
             var viewModel = new HotelViewModel
@@ -107,7 +108,7 @@ namespace HotelBooking.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            var hotel = await _repo.GetByIdAsync(model.Id);
+            var hotel = await _hotelRepo.GetByIdAsync(model.Id);
             if (hotel == null)
                 return NotFound();
 
@@ -131,29 +132,32 @@ namespace HotelBooking.Controllers
                 hotel.ImageUrl = newImageName;
             }
 
-            _repo.Update(hotel);
-            await _repo.SaveAsync();
+            _hotelRepo.Update(hotel);
+            await _hotelRepo.SaveAsync();
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var hotel = await _repo.GetByIdAsync(id);
+            var hotel = await _hotelRepo.GetByIdAsync(id);
             if (hotel == null)
                 return NotFound();
 
             return View(hotel);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost,ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 
-            var hotel = await _repo.GetByIdAsync(id);
+            var hotel = await _hotelRepo.GetByIdAsync(id);
             if (hotel == null)
-            _repo.Delete(hotel);
-            await _repo.SaveAsync();
+            {
+                return NotFound();
+            }
+            _hotelRepo.Delete(hotel!);
+            await _hotelRepo.SaveAsync();
             return RedirectToAction("Index");
         }
     }
