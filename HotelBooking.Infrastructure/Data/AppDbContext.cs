@@ -19,6 +19,16 @@ namespace HotelBooking.Infrastructure.Data
          public DbSet<Booking> Bookings { get; set; }
          public DbSet<Agent> Agents { get; set; }
          public DbSet<Season> Seasons { get; set; }
-        
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Room>()
+                .HasIndex(r => new { r.RoomNumber, r.HotelId })
+                .IsUnique();
+        }
     }
+
 }

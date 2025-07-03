@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Domain.IRepositories
 {
-    public interface IHotelRepo :IRepo<Hotel>
+    public interface IHotelRepo 
     {
+        Task<IEnumerable<Hotel>> GetAllAsync();
+        Task<Hotel?> GetByIdAsync(int id);
+        Task AddAsync(Hotel entity);
+        void Update(Hotel entity);
+        void Delete(Hotel entity);
+        Task SaveAsync();
         Task<IEnumerable<Hotel>> GetTopRatedHotelsAsync();
     }
 }

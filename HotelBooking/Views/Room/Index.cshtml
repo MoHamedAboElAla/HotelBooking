@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HotelBooking.Domain.Models.Room>
+@{
+    ViewData["Title"] = "Room List";
+}
+
+<h2>Room List</h2>
+<a asp-action="Create" class="btn btn-success mb-3">+ Add New Room</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Room #</th>
+            <th>Type</th>
+            <th>Price/Night</th>
+            <th>Hotel</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.RoomNumber</td>
+                <td>@room.RoomType</td>
+                <td>@room.PricePerNight</td>
+                <td>@room.Hotel?.Name</td>
+                <td>@(room.IsAvailable ? "Available" : "Not Available")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@room.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@room.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
