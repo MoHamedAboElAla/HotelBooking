@@ -19,7 +19,6 @@ namespace HotelBooking
           
           builder.Services.AddScoped<HotelBooking.Domain.IRepositories.ISeasonRepo, HotelBooking.Infrastructure.Repositories.SeasonRepo>();     
           builder.Services.AddScoped<IRoomRepo, RoomRepo>();
-          builder.Services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
           builder.Services.AddScoped<IHotelRepo, HotelRepo>();
           
           
