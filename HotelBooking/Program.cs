@@ -20,10 +20,13 @@ namespace HotelBooking
           builder.Services.AddScoped<HotelBooking.Domain.IRepositories.ISeasonRepo, HotelBooking.Infrastructure.Repositories.SeasonRepo>();     
           builder.Services.AddScoped<IRoomRepo, RoomRepo>();
           builder.Services.AddScoped<IHotelRepo, HotelRepo>();
+          builder.Services.AddScoped<IBookingRepo, BookingRepo>();
+
           
-          
-          
-          var app = builder.Build();
+
+
+
+            var app = builder.Build();
 
 
             // Configure the HTTP request pipeline.
