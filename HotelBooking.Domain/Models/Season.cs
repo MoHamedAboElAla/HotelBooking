@@ -18,7 +18,8 @@ namespace HotelBooking.Domain.Models
         public DateTime StartDate { get; set; }
         [Required(ErrorMessage = "End date is required")]
         public DateTime EndDate { get; set; }
-        [Required, Range(50, 200, ErrorMessage = "Price factor must be between 50 and 200.0.")]
+        [Range(0.1, 1.0, ErrorMessage = "Price factor must be between 0.1 and 1.0 .")]
+
         public decimal PriceFactor { get; set; }
 
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();

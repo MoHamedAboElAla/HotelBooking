@@ -9,6 +9,7 @@ namespace HotelBooking.Domain.IRepositories
         Task AddAsync(Season season);
         void Update(Season season);
         void Delete(Season season);
+        Task<Season?> GetSeasonByDateRangeAsync(DateTime checkIn, DateTime checkOut);
         Task SaveChangesAsync();
     }
 }

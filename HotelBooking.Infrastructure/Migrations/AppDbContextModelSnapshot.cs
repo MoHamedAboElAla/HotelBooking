@@ -59,7 +59,7 @@ namespace HotelBooking.Infrastructure.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("Agents");
+                    b.ToTable("Agents", (string)null);
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Models.Booking", b =>
@@ -104,7 +104,7 @@ namespace HotelBooking.Infrastructure.Migrations
 
                     b.HasIndex("SeasonId");
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Bookings", (string)null);
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Models.Hotel", b =>
@@ -143,7 +143,7 @@ namespace HotelBooking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Hotels");
+                    b.ToTable("Hotels", (string)null);
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Models.Room", b =>
@@ -186,7 +186,7 @@ namespace HotelBooking.Infrastructure.Migrations
                     b.HasIndex("RoomNumber", "HotelId")
                         .IsUnique();
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Rooms", (string)null);
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Models.Season", b =>
@@ -218,7 +218,7 @@ namespace HotelBooking.Infrastructure.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("Seasons");
+                    b.ToTable("Seasons", (string)null);
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Models.Agent", b =>

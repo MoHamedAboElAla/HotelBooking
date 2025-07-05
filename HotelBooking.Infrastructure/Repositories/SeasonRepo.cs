@@ -43,5 +43,13 @@ namespace HotelBooking.Infrastructure.Repositories
         {
             await _context.SaveChangesAsync();
         }
+
+        public Task<Season?> GetSeasonByDateRangeAsync(DateTime checkIn, DateTime checkOut)
+        {
+
+            return _context.Seasons
+                .Where(s => s.StartDate <= checkIn && s.EndDate >= checkOut)
+                .FirstOrDefaultAsync();
+        }
     }
 }
