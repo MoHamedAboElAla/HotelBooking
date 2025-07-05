@@ -211,14 +211,17 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                <a class="dropdown-item" asp-controller="Hotel" asp-action="Index">Hotel</a>
+                                <a class="dropdown-item" asp-controller="Hotel" asp-action="Index">Hotels</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-controller="Room" asp-action="Index">Room</a>
+                                        <a class="dropdown-item" asp-controller="Room" asp-action="Index">Rooms</a>
                                     </li>
                                     <li class="nav-item">
-                                <a class="dropdown-item" asp-controller="Season" asp-action="Index">Season</a>
+                                <a class="dropdown-item" asp-controller="Season" asp-action="Index">Seasons</a>
                                     </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item" asp-controller="Booking" asp-action="Index">Bookings</a>
+                            </li>
                                     </ul>
                    
                 </ul>
@@ -268,7 +271,6 @@
                         <div class="card-body">
                             <h5 class="hotel-name">The Ritz Luxury Hotel</h5>
                             <p class="hotel-description">A five-star hotel in the city center with stunning views and exceptional services for business guests.</p>
-                            <a href="#contact" class="btn btn-primary-custom">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -278,7 +280,7 @@
                         <div class="card-body">
                             <h5 class="hotel-name">Blue Sea Resort</h5>
                             <p class="hotel-description">A luxurious beachfront resort offering a perfect relaxing experience with full recreational facilities.</p>
-                            <a href="#contact" class="btn btn-primary-custom">Book Now</a>
+                          
                         </div>
                     </div>
                 </div>
@@ -287,8 +289,7 @@
                         <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Business Hotel">
                         <div class="card-body">
                             <h5 class="hotel-name">Central Business Hotel</h5>
-                            <p class="hotel-description">A modern hotel designed specifically for business professionals with meeting rooms and advanced facilities.</p>
-                            <a href="#contact" class="btn btn-primary-custom">Book Now</a>
+                            <p class="hotel-description">A modern hotel designed specifically for business professionals with meeting rooms .</p>
                         </div>
                     </div>
                 </div>
@@ -302,7 +303,7 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <h2 class="section-title">Contact Us</h2>
-                    <form>
+                    <form onsubmit="return sendWhatsAppMessage();">
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <label for="companyName" class="form-label">Company Name</label>
@@ -341,3 +342,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<script>
+    function sendWhatsAppMessage() {
+        const companyName = document.getElementById('companyName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        const fullMessage = `🛎 Contact Request\n\n👨‍💼 Company Name: ${companyName}\n📧 Email: ${email}\n💬 Message:\n${message}`;
+
+
+        const yourWhatsAppNumber = "201205400269";
+
+
+        const whatsappLink = `https://wa.me/${yourWhatsAppNumber}?text=${encodeURIComponent(fullMessage)}`;
+
+
+        window.open(whatsappLink, '_blank');
+        return false;
+    }
+</script>
