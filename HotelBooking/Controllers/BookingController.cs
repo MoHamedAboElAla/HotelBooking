@@ -93,7 +93,12 @@ namespace HotelBooking.Controllers
             booking.TotalPrice = adjustedPrice * nights;
             booking.AgentId = 2; // add any agent in your db manually and set the id here modified later
 
+
+            room.IsAvailable = false;
+             _roomRepo.Update(room);
             await _bookingRepo.AddAsync(booking);
+           
+           
             await _bookingRepo.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -168,9 +173,22 @@ namespace HotelBooking.Controllers
             {
                 return NotFound();
             }
-
+           
             _bookingRepo.Delete(booking);
             await _bookingRepo.SaveChangesAsync();
+            var room = await _roomRepo.GetByIdAsync(booking.RoomId ?? 0);
+
+            if (room != null)
+            {
+               var hasOtherBookings = await _bookingRepo.GetBookingsByRoomIdAsync(room.Id);
+                if (!hasOtherBookings.Any())
+                {
+                    room.IsAvailable = true;
+                    _roomRepo.Update(room);
+                    await _roomRepo.SaveChangesAsync();
+                }
+            }
+            
             return RedirectToAction(nameof(Index));
         }
 
