@@ -1,49 +1,263 @@
-﻿ <!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HotelBooking</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HotelBooking.styles.css" asp-append-version="true" />
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff !important;
+            opacity: 0.9;
+        }
+
+            .navbar-dark .navbar-nav .nav-link:hover,
+            .navbar-dark .navbar-nav .nav-link.active {
+                color: #ffc107 !important;
+            }
+
+        .navbar-dark .navbar-nav .nav-link {
+            font-weight: 500;
+        }
+
+        .navbar-dark .navbar-brand {
+            font-weight: 600;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #283E51, #485563);
+            color: white;
+            text-align: center;
+        }
+
+        .sidebar {
+            background-color: #212529;
+            min-height: 100vh;
+            color: white;
+            width: 240px;
+        }
+
+            .sidebar .nav-link {
+                color: white;
+                padding: 12px 20px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 500;
+            }
+
+                .sidebar .nav-link:hover {
+                    background-color: #343a40;
+                    color: #ffc107;
+                }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar h5 {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HotelBooking</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background: linear-gradient(90deg, #283E51, #485563);">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-4" asp-controller="Home" asp-action="Index">
+                <i class="bi bi-building me-1"></i> HotelBooking
+            </a>
+            <div class="d-flex gap-2 ms-auto">
+                <a class="btn btn-outline-light" asp-controller="Account" asp-action="Login">Login</a>
+                <a class="btn btn-warning text-dark fw-semibold" asp-controller="Account" asp-action="Register">Register</a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
+    </nav>
+
+    <!-- Sidebar + Main Content -->
+    <div class="d-flex" style="flex: 1;">
+        <!-- Sidebar -->
+        <div class="sidebar p-3">
+            <h5 class="text-white mb-4"><i class="bi bi-grid me-2"></i>Dashboard</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Hotel" asp-action="Index"><i class="bi bi-building"></i> Hotels</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Room" asp-action="Index"><i class="bi bi-door-closed"></i> Rooms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Booking" asp-action="Index"><i class="bi bi-calendar-check"></i> Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Season" asp-action="Index"><i class="bi bi-cloud-sun"></i> Seasons</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - HotelBooking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+@*  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HotelBooking</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HotelBooking.styles.css" asp-append-version="true" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+
+        main {
+            flex: 1;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff !important;
+            opacity: 0.9;
+        }
+
+            .navbar-dark .navbar-nav .nav-link:hover,
+            .navbar-dark .navbar-nav .nav-link.active {
+                color: #ffc107 !important; 
+            }
+
+        .navbar-dark .navbar-nav .nav-link {
+            font-weight: 500;
+        }
+        .navbar-dark .navbar-brand {
+            font-weight: 600;
+        }
+
+
+        footer {
+            background: linear-gradient(90deg, #283E51, #485563);
+            color: white;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background: linear-gradient(90deg, #283E51, #485563);">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-4" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-building me-1"></i> HotelBooking
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                        aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarMain">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Hotel" asp-action="Index">Hotels</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Room" asp-action="Index">Rooms</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Booking" asp-action="Index">Bookings</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Season" asp-action="Index">Seasons</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-light" asp-controller="Account" asp-action="Login">Login</a>
+                        <a class="btn btn-warning text-dark fw-semibold" asp-controller="Account" asp-action="Register">Register</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <br />
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p>&copy; 2025 Hotel Solutions. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+ *@
